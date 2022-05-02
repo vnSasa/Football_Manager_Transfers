@@ -1,0 +1,154 @@
+GET http://localhost:9090/players/all
+
+[
+    {
+        "id": 1,
+        "fullName": "Marc-André ter Stegen",
+        "age": 29,
+        "monthsOfExperience": 134,
+        "nationality": "Germany",
+        "teamDto": {
+            "team_id": 1,
+            "teamName": "FC Barcelona",
+            "country": "Spain",
+            "accountBalance": 1.7E7,
+            "transferTax": 7.6
+        }
+    },
+    {
+        "id": 2,
+        "fullName": "Gerard Pique",
+        "age": 34,
+        "monthsOfExperience": 75,
+        "nationality": "Spain",
+        "teamDto": {
+            "team_id": 1,
+            "teamName": "FC Barcelona",
+            "country": "Spain",
+            "accountBalance": 1.7E7,
+            "transferTax": 7.6
+        }
+    },
+    {
+        "id": 3,
+        "fullName": "Paolo Dybala",
+        "age": 27,
+        "monthsOfExperience": 68,
+        "nationality": "Argentina",
+        "teamDto": {
+            "team_id": 2,
+            "teamName": "Juventus",
+            "country": "Italy",
+            "accountBalance": 1.2E7,
+            "transferTax": 8.2
+        }
+    },
+    {
+        "id": 4,
+        "fullName": "David de Gea",
+        "age": 31,
+        "monthsOfExperience": 136,
+        "nationality": "Spain",
+        "teamDto": {
+            "team_id": 3,
+            "teamName": "Manchester United",
+            "country": "England",
+            "accountBalance": 2.1E7,
+            "transferTax": 6.9
+        }
+    },
+    {
+        "id": 5,
+        "fullName": "Raphael Varane",
+        "age": 28,
+        "monthsOfExperience": 63,
+        "nationality": "France",
+        "teamDto": {
+            "team_id": 3,
+            "teamName": "Manchester United",
+            "country": "England",
+            "accountBalance": 2.1E7,
+            "transferTax": 6.9
+        }
+    },
+    {
+        "id": 6,
+        "fullName": "Cristiano Ronaldo",
+        "age": 34,
+        "monthsOfExperience": 140,
+        "nationality": "Portugal",
+        "teamDto": {
+            "team_id": 3,
+            "teamName": "Manchester United",
+            "country": "England",
+            "accountBalance": 2.1E7,
+            "transferTax": 6.9
+        }
+    },
+    {
+        "id": 7,
+        "fullName": "Romeru Lukaku",
+        "age": 29,
+        "monthsOfExperience": 102,
+        "nationality": "Belgium",
+        "teamDto": {
+            "team_id": 4,
+            "teamName": "Chelsea",
+            "country": "England",
+            "accountBalance": 2.4E7,
+            "transferTax": 7.7
+        }
+    }
+]
+
+GET http://localhost:9090/football-team/all
+
+[
+    {
+        "team_id": 1,
+        "teamName": "FC Barcelona",
+        "country": "Spain",
+        "accountBalance": 1.7E7,
+        "transferTax": 7.6
+    },
+    {
+        "team_id": 2,
+        "teamName": "Juventus",
+        "country": "Italy",
+        "accountBalance": 1.2E7,
+        "transferTax": 8.2
+    },
+    {
+        "team_id": 3,
+        "teamName": "Manchester United",
+        "country": "England",
+        "accountBalance": 2.1E7,
+        "transferTax": 6.9
+    },
+    {
+        "team_id": 4,
+        "teamName": "Chelsea",
+        "country": "England",
+        "accountBalance": 2.4E7,
+        "transferTax": 7.7
+    }
+]
+
+POST http://localhost:9090/players/transfer?player_id=1&team_id=3
+
+GET http://localhost:9090/players/1
+
+{
+    "id": 1,
+    "fullName": "Marc-André ter Stegen",
+    "age": 29,
+    "monthsOfExperience": 134,
+    "nationality": "Germany",
+    "teamDto": {
+        "team_id": 3,
+        "teamName": "Manchester United",
+        "country": "England",
+        "accountBalance": 2.0502815E7,
+        "transferTax": 6.9
+    }
+}
