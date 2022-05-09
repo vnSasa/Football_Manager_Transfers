@@ -1,4 +1,47 @@
-GET http://localhost:9090/players/all
+- GET http://localhost:9090/football-team/all
+
+[
+    {
+        "team_id": 1,
+        "teamName": "FC Barcelona",
+        "country": "Spain",
+        "accountBalance": 1.7E7,
+        "transferTax": 7.6
+    },
+    {
+        "team_id": 2,
+        "teamName": "Juventus",
+        "country": "Italy",
+        "accountBalance": 1.2E7,
+        "transferTax": 8.2
+    },
+    {
+        "team_id": 3,
+        "teamName": "Manchester United",
+        "country": "England",
+        "accountBalance": 2.1E7,
+        "transferTax": 6.9
+    },
+    {
+        "team_id": 4,
+        "teamName": "Chelsea",
+        "country": "England",
+        "accountBalance": 2.4E7,
+        "transferTax": 7.7
+    }
+]
+
+- GET http://localhost:9090/football-team/4
+
+{
+    "team_id": 4,
+    "teamName": "Chelsea",
+    "country": "England",
+    "accountBalance": 2.4E7,
+    "transferTax": 7.7
+}
+
+- GET http://localhost:9090/players/all
 
 [
     {
@@ -101,54 +144,224 @@ GET http://localhost:9090/players/all
     }
 ]
 
-GET http://localhost:9090/football-team/all
+- POST http://localhost:9090/players
 
-[
-    {
-        "team_id": 1,
-        "teamName": "FC Barcelona",
-        "country": "Spain",
-        "accountBalance": 1.7E7,
-        "transferTax": 7.6
-    },
-    {
-        "team_id": 2,
-        "teamName": "Juventus",
-        "country": "Italy",
-        "accountBalance": 1.2E7,
-        "transferTax": 8.2
-    },
-    {
-        "team_id": 3,
-        "teamName": "Manchester United",
-        "country": "England",
-        "accountBalance": 2.1E7,
-        "transferTax": 6.9
-    },
-    {
+	REQUEST:
+
+{
+    "fullName": "Didier Drogba",
+    "age": 44,
+    "monthsOfExperience": 175,
+    "nationality": "Ivory Coast",
+    "teamDto": {
+        "team_id": 4
+    }
+}
+
+	RESPONSE
+
+{
+    "id": 8,
+    "fullName": "Didier Drogba",
+    "age": 44,
+    "monthsOfExperience": 175,
+    "nationality": "Ivory Coast",
+    "teamDto": {
+        "team_id": 4,
+        "teamName": null,
+        "country": null,
+        "accountBalance": null,
+        "transferTax": null
+    }
+}
+
+- GET http://localhost:9090/players/8
+
+{
+    "id": 8,
+    "fullName": "Didier Drogba",
+    "age": 44,
+    "monthsOfExperience": 175,
+    "nationality": "Ivory Coast",
+    "teamDto": {
         "team_id": 4,
         "teamName": "Chelsea",
         "country": "England",
         "accountBalance": 2.4E7,
         "transferTax": 7.7
     }
-]
+}
 
-POST http://localhost:9090/players/transfer?player_id=1&team_id=3
+- PUT http://localhost:9090/players/8
 
-GET http://localhost:9090/players/1
+	REQUEST
 
 {
-    "id": 1,
-    "fullName": "Marc-André ter Stegen",
-    "age": 29,
-    "monthsOfExperience": 134,
-    "nationality": "Germany",
+    "id": 8,
+    "fullName": "Didier Drogba",
+    "age": 45,
+    "monthsOfExperience": 180,
+    "nationality": "Ivory Coast",
+    "teamDto": {
+        "team_id": 4
+    }
+}
+
+	RESPONSE
+
+{
+    "id": 8,
+    "fullName": "Didier Drogba",
+    "age": 45,
+    "monthsOfExperience": 180,
+    "nationality": "Ivory Coast",
+    "teamDto": {
+        "team_id": 4,
+        "teamName": null,
+        "country": null,
+        "accountBalance": null,
+        "transferTax": null
+    }
+}
+
+- POST http://localhost:9090/players/transfer?player_id=8&team_id=3
+
+	BEFORE REQUEST:
+		
+		"team_id": 4,
+        "teamName": "Chelsea",
+        "country": "England",
+        "accountBalance": 2.4E7,
+        "transferTax": 7.7
+		
+		"team_id": 3,
+        "teamName": "Manchester United",
+        "country": "England",
+        "accountBalance": 2.1E7,
+        "transferTax": 6.9
+		
+	AFTER REQUEST:
+	
+		"team_id": 4,
+        "teamName": "Chelsea",
+        "country": "England",
+        "accountBalance": 2.44308E7,
+        "transferTax": 7.7
+	
+		"team_id": 3,
+        "teamName": "Manchester United",
+        "country": "England",
+        "accountBalance": 2.05692E7,
+        "transferTax": 6.9
+		
+	RESPONSE
+	
+{
+    "id": 8,
+    "fullName": "Didier Drogba",
+    "age": 45,
+    "monthsOfExperience": 180,
+    "nationality": "Ivory Coast",
     "teamDto": {
         "team_id": 3,
         "teamName": "Manchester United",
         "country": "England",
-        "accountBalance": 2.0502815E7,
+        "accountBalance": 2.05692E7,
         "transferTax": 6.9
     }
+}
+
+- DELETE http://localhost:9090/players/8
+
+- GET http://localhost:9090/players/8
+
+	RESPONSE
+	
+{
+    "message": "Player with id 8 not found!!!"
+}
+
+- GET http://localhost:9090/football-team/2
+
+{
+    "team_id": 2,
+    "teamName": "Juventus",
+    "country": "Italy",
+    "accountBalance": 1.2E7,
+    "transferTax": 8.2
+}
+
+- PUT http://localhost:9090/football-team/2
+
+	REQUEST
+	
+{
+    "team_id": 2,
+    "teamName": "Juventus",
+    "country": "Italy",
+    "accountBalance": 1.2E7,
+    "transferTax": 8.4
+}
+
+	RESPONSE
+	
+{
+    "team_id": 2,
+    "teamName": "Juventus",
+    "country": "Italy",
+    "accountBalance": 1.2E7,
+    "transferTax": 8.4
+}
+
+- POST http://localhost:9090/football-team
+
+	REQUEST
+	
+{
+    "teamName": "Liverpool",
+    "country": "England",
+    "accountBalance": 90000000,
+    "transferTax": 8.3
+}
+
+	RESPONSE
+	
+{
+    "team_id": 5,
+    "teamName": "Liverpool",
+    "country": "England",
+    "accountBalance": 9.0E7,
+    "transferTax": 8.3
+}
+
+- PUT http://localhost:9090/football-team/5
+
+	REQUEST
+	
+{
+    "team_id": 5,
+    "teamName": "Liverpool",
+    "country": "England",
+    "accountBalance": 9.0E7,
+    "transferTax": 8.7
+}
+
+	RESPONSE
+	
+{
+    "team_id": 5,
+    "teamName": "Liverpool",
+    "country": "England",
+    "accountBalance": 9.0E7,
+    "transferTax": 8.7
+}
+
+- DELETE http://localhost:9090/football-team/5
+
+- GET http://localhost:9090/football-team/5
+
+	RESPONSE
+	
+{
+    "message": "Team with id 5 not found!"
 }

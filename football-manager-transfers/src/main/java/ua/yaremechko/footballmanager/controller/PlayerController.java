@@ -54,7 +54,7 @@ public class PlayerController {
         service.transfer(player_id, team_id);
     }
 
-    @PutMapping
+    @PutMapping("/{id}")
     public PlayerDto updatePlayer(@PathVariable Long id,
                                   @Valid @RequestBody PlayerDto playerDTO) {
         return service.update(playerDTO);
